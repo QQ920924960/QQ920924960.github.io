@@ -3,8 +3,8 @@ paginate: 10
 markdown: redcarpet
 
 # 作者信息
-author: Frank Chen
-  name: QQ920924960
+author: 
+  name: Frank Chen
   email: 920924960@qq.com
   link: http://920924960.blog.126.com
   weibo: http://weibo.com/orangeissweet
