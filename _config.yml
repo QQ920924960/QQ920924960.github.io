@@ -6,8 +6,8 @@ markdown: redcarpet
 author: 
   name: Frank Chen
   email: 920924960@qq.com
-  link: http://920924960.blog.126.com
-  weibo: http://weibo.com/orangeissweet
+  link: http://qq920924960.blog.163.com/
+  weibo: http://weibo.com/qq920924960
   github: https://github.com/QQ920924960
   music: http://qq920924960.blog.163.com/music
   linkedin: https://github.com/QQ920924960
@@ -33,6 +33,7 @@ disqus:
 
 # 主题设置，自动激活某个标签
 active: 读书
+newest: 最新文章
 
 # 首页除了最新文章外显示分类
 cates: 
