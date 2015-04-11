@@ -5728,7 +5728,7 @@ a.list-group-item-danger.active:focus {
 
 .panel-group {
     margin-bottom: 20px;
-    margin-left: 5px;
+    margin-left: 2px;
 }
 
 .panel-group .panel {
@@ -5737,7 +5737,7 @@ a.list-group-item-danger.active:focus {
 }
 
 .panel-group .panel+.panel {
-    margin-top: 5px
+    margin-top: 2px
 }
 
 .panel-group .panel-heading {
@@ -5830,9 +5830,9 @@ a.list-group-item-danger.active:focus {
 }
 
 .panel-info>.panel-heading {
-    color: #31708f;
-    background-color: #E5F7F3;
-    border-color: #B7F4ED;
+    color: #FFFFFF;
+    background-color: #1ABC9C;
+    border-color: #1ABC9C;
 }
 
 .panel-info>.panel-heading+.panel-collapse>.panel-body {
