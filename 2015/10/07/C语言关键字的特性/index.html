@@ -1,0 +1,561 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>C语言关键字的特性 | QQ920924960的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="QQ920924960">
+    
+
+    
+    <meta name="description" content="介绍C语言一些关键字的特性">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言关键字的特性">
+<meta property="og:url" content="http://yoursite.com/2015/10/07/C语言关键字的特性/index.html">
+<meta property="og:site_name" content="QQ920924960的博客">
+<meta property="og:description" content="介绍C语言一些关键字的特性">
+<meta property="og:updated_time" content="2016-03-30T14:24:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C语言关键字的特性">
+<meta name="twitter:description" content="介绍C语言一些关键字的特性">
+
+    
+    <link rel="alternative" href="/atom.xml" title="QQ920924960的博客" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="QQ920924960的博客">QQ920924960的博客</a></h1>
+				<h2 class="blog-motto">怕什么真理无穷, 进一寸有一寸的欢喜！</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/10/07/C语言关键字的特性/" title="C语言关键字的特性" itemprop="url">C语言关键字的特性</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="QQ920924960" target="_blank" itemprop="author">QQ920924960</a>
+		
+  <p class="article-time">
+    <time datetime="2015-10-07T10:29:00.000Z" itemprop="datePublished"> 发表于 2015-10-07</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#volatile关键字"><span class="toc-number">1.</span> <span class="toc-text">volatile关键字</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#sizeof关键字"><span class="toc-number">2.</span> <span class="toc-text">sizeof关键字</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#register关键字"><span class="toc-number">3.</span> <span class="toc-text">register关键字</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#const关键字"><span class="toc-number">4.</span> <span class="toc-text">const关键字</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#typedef关键字"><span class="toc-number">5.</span> <span class="toc-text">typedef关键字</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#struct类型"><span class="toc-number">6.</span> <span class="toc-text">struct类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#多字符常量"><span class="toc-number">7.</span> <span class="toc-text">多字符常量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#表达式和结构篇"><span class="toc-number">8.</span> <span class="toc-text">表达式和结构篇</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#switch语句"><span class="toc-number">8.1.</span> <span class="toc-text">switch语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scanf忽略输入"><span class="toc-number">8.2.</span> <span class="toc-text">scanf忽略输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组名"><span class="toc-number">8.3.</span> <span class="toc-text">数组名</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#指针与函数篇"><span class="toc-number">9.</span> <span class="toc-text">指针与函数篇</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数组与指针参数"><span class="toc-number">10.</span> <span class="toc-text">数组与指针参数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#指针返回值"><span class="toc-number">11.</span> <span class="toc-text">指针返回值</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#函数指针"><span class="toc-number">12.</span> <span class="toc-text">函数指针</span></a></li></ol>
+		
+		</div>
+		
+		<h1 id="volatile关键字"><a href="#volatile关键字" class="headerlink" title="volatile关键字"></a>volatile关键字</h1><p>鲜为人知的关键字之一volatile，表示变量是’易变的’，之所以会有这个关键字，主要是消除编译优化带来的一些问题，看下面的代码<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">8</span>;</span><br><span class="line"><span class="keyword">int</span> b = a;</span><br><span class="line"><span class="keyword">int</span> c = a;</span><br></pre></td></tr></table></figure></p>
+<p>编译器认为，上面的第2句代码与第三句代码之间，没有存在对a赋值的语句，所以编译出来的汇编代码在讲a的值赋给c的时候，不会再次到内存取这个变量的值，而是取cache中的值。这样虽然提高了效率，但也带来了一些问题，比如如果变量a被多个线程共享，且在a赋值给了b之后，a的值立马被另一个线程修改，则再赋值给c的就是过时的数据，有时希望c拿到的是实时的数据，这个时候volatile关键字就派上了用场<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">volatile</span> <span class="keyword">int</span> a = <span class="number">8</span>;</span><br><span class="line"><span class="keyword">int</span> b = a;</span><br><span class="line"><span class="keyword">int</span> c = a;</span><br></pre></td></tr></table></figure></p>
+<p>上面的关键字告诉编译器a的值是随时可能发生变化的值，要求每次使用都到内存中取值，这样就能保证c能获得实时数据。</p>
+<h1 id="sizeof关键字"><a href="#sizeof关键字" class="headerlink" title="sizeof关键字"></a>sizeof关键字</h1><p>很多人都认为sizeof 是函数，因为带括号嘛，还有返回值，不是函数是啥。其实sizeof 是关键字，不信你在测试变量的时候把括号去掉试试，当然，如果测试的是类型，则必须加括号，因为你如果sizeof 类型，不打扩号的话，编译器认为你在定义变量，而定义变量的时候前面显然是只能是修饰符如const，static和extern之类的，绝对不能是sizeof 所以会报错。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">9</span>; </span><br><span class="line"><span class="keyword">sizeof</span>(a) ; <span class="comment">// 合法</span></span><br><span class="line"><span class="keyword">sizeof</span> a ;  <span class="comment">// 合法</span></span><br><span class="line"><span class="keyword">sizeof</span> <span class="keyword">int</span> ;<span class="comment">// 非法</span></span><br><span class="line"><span class="keyword">sizeof</span>(<span class="keyword">int</span>);<span class="comment">// 合法</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="register关键字"><a href="#register关键字" class="headerlink" title="register关键字"></a>register关键字</h1><p>register关键字定义的变量可能放在寄存器里面，可能放在寄存器里，也可能放在内存里，所以为了安全起见，不能对寄存器变量取地址，所以下面的代码编译会报错<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">register</span> <span class="keyword">int</span> a = <span class="number">0</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>,&amp;a);</span><br></pre></td></tr></table></figure></p>
+<h1 id="const关键字"><a href="#const关键字" class="headerlink" title="const关键字"></a>const关键字</h1><p>C语言中，const关键字定义了一个不可变的变量a ，注意a还是一个变量，没错是变量，不是常量，只是值不能变，是只读变量，编译的时候是不能确定值的。下面的代码可以说明问题<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> a = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">int</span> arr[a];</span><br></pre></td></tr></table></figure></p>
+<p>上面的代码在VC6.0的ANSI标准下会报错，因为const定义的依然是变量，当然在GNU这种先进的编译器下会通过。</p>
+<h1 id="typedef关键字"><a href="#typedef关键字" class="headerlink" title="typedef关键字"></a>typedef关键字</h1><p>大多人认为typedef是定义一个新的数据类型，其实不是，typedef关键字是给一个已经存在的数据类型取一个别名，很多人喜欢在定义类型的同时使用 typedef关键字，这就让自己慢慢的也误以为typedef是在定义一种新的数据类型<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> s&#123;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">int</span> b;</span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">&#125; NS;</span><br></pre></td></tr></table></figure></p>
+<p>其实换成像下面这样可能会更好<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> s&#123;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">int</span> b;</span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> s NS;</span><br></pre></td></tr></table></figure></p>
+<p>另外看看下面的代码</p>
+<p>先添加这样的声明<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> s * PNS;</span><br></pre></td></tr></table></figure></p>
+<p>看下面的代码<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">NS ns;</span><br><span class="line"><span class="keyword">const</span> PNS pns1 = &amp;ns;</span><br><span class="line">pns1-&gt;a = <span class="number">8</span>;</span><br><span class="line">NS ns2 ;</span><br><span class="line">pns1 = &amp;ns2; <span class="comment">// 报错,pns1 只读</span></span><br><span class="line">PNS <span class="keyword">const</span> pns2 = &amp;ns;</span><br><span class="line">pns2-&gt;a = <span class="number">8</span>;</span><br><span class="line">pns2 = &amp;ns2; <span class="comment">// 报错，pns2 只读</span></span><br></pre></td></tr></table></figure></p>
+<p>大家可能都能明白 <code>const int  * p</code>和 <code>int * const p</code>的区别，但这里就有些模糊了，这个结果颠覆了大家的思维。</p>
+<p>这是因为能把 <code>（struct s *）</code>重定义为一个整体，<code>const</code>遇到整体的类型定义会直接将这个整体忽略，也就是对于<code>const int  * p</code>和 <code>int * const p</code>以及<code>const int p</code>和 <code>int const p</code>，编译器会把int忽略，得到 <code>const * p</code>和<code>* const p</code>，以及<code>const p</code>。</p>
+<p>所以对于<code>cosnt PNS pns1</code> 和 <code>PNS const pns2</code>，PNS会被忽略，就得到了<code>const pns1</code>和<code>const pns2</code>，所以<code>const</code>修饰什么显而易见</p>
+<p>数据类型篇</p>
+<h1 id="struct类型"><a href="#struct类型" class="headerlink" title="struct类型"></a>struct类型</h1><p>相信让大家说<code>struct</code>与<code>c++class</code>的区别，99%的开发者都知道有，标准的C语言中struct中不能定义函数的<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> s&#123;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getA</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>上面的代码在C语言的环境下会报错。再就是<code>struct</code>与<code>class</code>的默认访问属性不同。</p>
+<p>除了上面的区别，<code>struct</code>还具备一些<code>class</code>不具备的一些属性<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> s&#123;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">int</span> b;</span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 直接初始化</span></span><br><span class="line"><span class="keyword">struct</span> s ele = &#123;<span class="number">1</span>,<span class="number">2</span>&#125;;</span><br><span class="line"><span class="comment">// 全部成员初始化为0</span></span><br><span class="line"><span class="keyword">struct</span> s ele2 = &#123;<span class="number">0</span>&#125;;</span><br><span class="line"><span class="comment">// 指定初始化</span></span><br><span class="line"><span class="keyword">struct</span> s ele3 = &#123;.a = <span class="number">1</span>&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>还用空的结构体大小，在老版本的VC6.0 （应该是C89标准）不为0，而为1 ，因为最小的c语言类型为char，一个字节，struct的设计者要求struct至少能容纳一个字符，但是到了现在的C11标准，C语言中的空结构体大小为0，在C++中大小为1。</p>
+<p>另外，结构体还有一个很神奇的东西–柔性数组，也就是结构体的最后一个成员可以定义为一个柔性数组–b变长数组。这个柔性数组的大小不会算在结构体的大小内，向下面这样<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> s&#123;</span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">int</span> b;</span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">    <span class="keyword">int</span> arr[];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> s NS;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> s * PNS;</span><br><span class="line"><span class="comment">// 实例化</span></span><br><span class="line">PNS p = (PNS) <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(NS)+<span class="number">100</span>*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br></pre></td></tr></table></figure></p>
+<p>上面的代码就定义了一个结构体，并且分配了一个大小为100的柔性数组</p>
+<h1 id="多字符常量"><a href="#多字符常量" class="headerlink" title="多字符常量"></a>多字符常量</h1><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int str = 'ABCD';</span><br></pre></td></tr></table></figure>
+<p>上面的代码会让四个字母分别占据int的四个字节，至于具体值，取决于存储的是大端模式还是小端模式</p>
+<h1 id="表达式和结构篇"><a href="#表达式和结构篇" class="headerlink" title="表达式和结构篇"></a>表达式和结构篇</h1><h2 id="switch语句"><a href="#switch语句" class="headerlink" title="switch语句"></a>switch语句</h2><ul>
+<li>奇葩写法1<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> ch = <span class="string">'c'</span>;</span><br><span class="line"><span class="keyword">switch</span>(ch)&#123;</span><br><span class="line"><span class="keyword">case</span> <span class="string">'a'</span>...<span class="string">'z'</span>:</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"a-z"</span>);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">case</span> <span class="string">'A'</span>...<span class="string">'Z'</span>:</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"A-Z"</span>);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">default</span>:</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//运行结果a-z</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这种写法还算正常，GNU C扩充的，能够接受，下面这种。。</p>
+<ul>
+<li>奇葩写法2<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">3</span>,b = <span class="number">4</span>,m;</span><br><span class="line"><span class="keyword">switch</span>(a)&#123;</span><br><span class="line"><span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"1"</span>);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">if</span>(b == <span class="number">4</span>)&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"2"</span>);</span><br><span class="line">            ;</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">case</span> <span class="number">3</span>:&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"3"</span>);</span><br><span class="line">        <span class="keyword">for</span>(m = <span class="number">1</span>;m&lt;<span class="number">3</span>;m++)&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"4"</span>);</span><br><span class="line">            ;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 运行结果 344</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>第一次看到，我也惊呆了</p>
+<h2 id="scanf忽略输入"><a href="#scanf忽略输入" class="headerlink" title="scanf忽略输入"></a>scanf忽略输入</h2><p>这个问题相比很多人都遇到过，scanf读取无用的换行符，下面的代码可以很好的解决这个问题<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> c1,c2;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%c%*c%c"</span>,&amp;c1,&amp;c2);</span><br><span class="line"><span class="built_in">putchar</span>(c1);</span><br><span class="line"><span class="built_in">putchar</span>(c2);</span><br></pre></td></tr></table></figure></p>
+<p>这样，你换行输入单个字符才不会有问题，也有用下面这样的代码过滤换行符的<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>((ch = getchar()) == <span class="string">'\n'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>printf变量限定格式<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a=<span class="number">3</span>;</span><br><span class="line"><span class="keyword">float</span> m = <span class="number">3.1415926</span>;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%.*f\n"</span>,a,m);   <span class="comment">// 3.142</span></span><br></pre></td></tr></table></figure></p>
+<p>宏定义中的#号<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SQR(x) printf(<span class="string">"x^2 = %d\n"</span>,((x)*(x)));</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SQR2(x) printf(<span class="string">""</span>#x<span class="string">"^2 = %d\n"</span>,((x)*(x)));</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SQR3(x) printf(<span class="string">"%d^2 = %d\n"</span>,x,((x)*(x)));</span></span><br><span class="line"></span><br><span class="line">SQR(<span class="number">3</span>);     <span class="comment">// x^2 = 9</span></span><br><span class="line">SQR2(<span class="number">3</span>);    <span class="comment">// 3^2 = 9</span></span><br><span class="line">SQR3(<span class="number">3</span>);    <span class="comment">// 3^2 = 9</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="数组名"><a href="#数组名" class="headerlink" title="数组名"></a>数组名</h2><p>数组名是指针常量，定义完之后不能修改<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[<span class="number">3</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> a2[<span class="number">3</span>];</span><br><span class="line"><span class="keyword">int</span> * p = a2;</span><br><span class="line">arr = p;</span><br><span class="line">arr = a2;</span><br></pre></td></tr></table></figure></p>
+<p>函数调用时不能传递数组，传递的只不过是一个指针<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">(<span class="keyword">int</span> arr[<span class="number">100</span>])</span></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,<span class="keyword">sizeof</span>(arr));</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> arr[<span class="number">3</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>&#125;;</span><br><span class="line">fun(arr); <span class="comment">// 4</span></span><br></pre></td></tr></table></figure></p>
+<p>没错，那个参数列表中的100然并luan。关于向函数传递数组，后面还有讲解。</p>
+<h1 id="指针与函数篇"><a href="#指针与函数篇" class="headerlink" title="指针与函数篇"></a>指针与函数篇</h1><p>指针这部分如果学到比较好的这个应该都知道，算不得什么特性</p>
+<p>直接对内存地址赋值<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*(<span class="keyword">int</span>*)<span class="number">0x12ff7c</span> = <span class="number">100</span>;</span><br></pre></td></tr></table></figure></p>
+<p>取数组一行的最后一个值<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> arr[<span class="number">5</span>] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>&#125;;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>,*(*(&amp;arr+<span class="number">1</span>)<span class="number">-1</span>)); <span class="comment">// 5</span></span><br></pre></td></tr></table></figure></p>
+<p>这个其实也很简单，arr是一级指针，列指针，再取一次地址后得到行指针，+1之后偏移一行，再解引用降级为列指针，再减1恰好指向arr[4]，所以就是5。另外注意arr其实就是&amp;arr[0]的值，也就是数组首元素的首地址。它与数组首地址其实有区别的，当arr为二维数组的时候，两者就存在区别。如果为二位数组，则arr==&amp;arr[0]==&amp;&amp;arr[0][0]。</p>
+<h1 id="数组与指针参数"><a href="#数组与指针参数" class="headerlink" title="数组与指针参数"></a>数组与指针参数</h1><p>就像前面说到的，不能像函数传递一个数组，传递数组，编译器总是将它解析成一个指向数组首元素的指针，也就是说传递的使用个指针，指向数组的首元素，但不指向数组，也就是说传递arr与传递&amp;arr[0]没有区别，这进一步说明了数组首地址与数组首元素的首地址是有却别的。</p>
+<p>另外，指针传递也是数值传递看下面的代码<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> * p)</span></span>&#123;</span><br><span class="line">    p = <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> a = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">int</span> *p = &amp;a;</span><br><span class="line">f(p);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>,*p);</span><br></pre></td></tr></table></figure></p>
+<p>在没有C++引用传递的情况下，想传递指针，就要传递指针的指针。像下面这样<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">f2</span><span class="params">( <span class="keyword">int</span> ** pp)</span></span>&#123;</span><br><span class="line">    *pp = (<span class="keyword">int</span> *) <span class="built_in">malloc</span>(<span class="keyword">sizeof</span> (<span class="keyword">int</span>));</span><br><span class="line">    **pp = <span class="number">9</span>;</span><br><span class="line">&#125;</span><br><span class="line">f2(&amp;p);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>,*p); <span class="comment">// 9</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="指针返回值"><a href="#指针返回值" class="headerlink" title="指针返回值"></a>指针返回值</h1><p>不要将局部变量的地址作为返回值返回，像下面这样的代码。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> * <span class="title">getP</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">4</span>;</span><br><span class="line">    <span class="keyword">return</span> &amp;a;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> * <span class="title">getP1</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> * p = (<span class="keyword">int</span> *) <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">    *p = <span class="number">4</span>;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> *p = getP();</span><br><span class="line"><span class="keyword">int</span> *p1 = getP1();</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>,*p); </span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>,*p1);</span><br></pre></td></tr></table></figure></p>
+<p>虽然在我测试的时候都给出了正确的结果，但是这样做还是很危险的，因为局部变量在函数执行完毕后会被销毁，这个时候如果将局部变量的地址返回可能会得到野指针。</p>
+<h1 id="函数指针"><a href="#函数指针" class="headerlink" title="函数指针"></a>函数指针</h1><p>下面来分析一个比较复杂的函数指针调用<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(*(<span class="keyword">int</span>** (*) (<span class="keyword">int</span> **,<span class="keyword">int</span> **))<span class="number">0</span>)(<span class="keyword">int</span> **,<span class="keyword">int</span> **);</span><br></pre></td></tr></table></figure></p>
+<p>有点晕，其实分开来看，</p>
+<p><code>int** (*) (int **,int **)</code> 其实就是一个函数指针，函数的返回值是整形的二级指针，参数是两个整形的二级指针。</p>
+<p>而<code>(int** (*) (int **,int **))0</code>就是讲地址0指向的区域转换为函数指针</p>
+<p><code>*(int** (*) (int **,int **))0</code>就是对这个函数进行解引用</p>
+<p>而<code>(*(int** (*) (int **,int **))0)(int **,int **)</code>则是指行函数调用</p>
+<p>先整理这么多吧，C语言博大精深，有着各种鲜为人知的高级特性，这里列出来的只是九牛一毛而已，权当复习而已。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/C语言/">C语言</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/C语言/">C语言</a><a href="/tags/关键字/">关键字</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2015/10/07/C语言关键字的特性/" data-title="C语言关键字的特性 | QQ920924960的博客" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/03/27/hello-world/" title="Hello World">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Hello World</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/10/07/Linux学习：磁盘与文件系统管理/"  title="Linux学习：磁盘与文件系统管理">
+ <strong>下一篇：</strong><br/> 
+ <span>Linux学习：磁盘与文件系统管理
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2015/10/07/C语言关键字的特性/" data-title="C语言关键字的特性" data-url="http://yoursite.com/2015/10/07/C语言关键字的特性/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"920924960"};
+		(function() {
+			var ds = document.createElement('script');
+			ds.type = 'text/javascript';ds.async = true;
+			ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+			ds.charset = 'UTF-8';
+			(document.getElementsByTagName('head')[0] 
+			 || document.getElementsByTagName('body')[0]).appendChild(ds);
+		})();
+		</script>
+	<!-- 多说公共JS代码 end -->
+	
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#volatile关键字"><span class="toc-number">1.</span> <span class="toc-text">volatile关键字</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#sizeof关键字"><span class="toc-number">2.</span> <span class="toc-text">sizeof关键字</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#register关键字"><span class="toc-number">3.</span> <span class="toc-text">register关键字</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#const关键字"><span class="toc-number">4.</span> <span class="toc-text">const关键字</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#typedef关键字"><span class="toc-number">5.</span> <span class="toc-text">typedef关键字</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#struct类型"><span class="toc-number">6.</span> <span class="toc-text">struct类型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#多字符常量"><span class="toc-number">7.</span> <span class="toc-text">多字符常量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#表达式和结构篇"><span class="toc-number">8.</span> <span class="toc-text">表达式和结构篇</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#switch语句"><span class="toc-number">8.1.</span> <span class="toc-text">switch语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#scanf忽略输入"><span class="toc-number">8.2.</span> <span class="toc-text">scanf忽略输入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组名"><span class="toc-number">8.3.</span> <span class="toc-text">数组名</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#指针与函数篇"><span class="toc-number">9.</span> <span class="toc-text">指针与函数篇</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#数组与指针参数"><span class="toc-number">10.</span> <span class="toc-text">数组与指针参数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#指针返回值"><span class="toc-number">11.</span> <span class="toc-text">指针返回值</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#函数指针"><span class="toc-number">12.</span> <span class="toc-text">函数指针</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/C语言/" title="C语言">C语言<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Linux/" title="Linux">Linux<sup>4</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Linux/" title="Linux">Linux<sup>4</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/文件管理/" title="文件管理">文件管理<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/目录管理/" title="目录管理">目录管理<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/C语言/" title="C语言">C语言<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/关键字/" title="关键字">关键字<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git/" title="git">git<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/版本控制/" title="版本控制">版本控制<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/文件系统/" title="文件系统">文件系统<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://zmosa.com" target="_blank" title="凯叔叔的博客">zmosa.com</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="https://github.com/QQ920924960" target="_blank" title="github">github</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="QQ920924960">QQ920924960</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"920924960"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
