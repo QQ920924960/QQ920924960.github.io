@@ -4,25 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Linux学习：文件权限与目录配置 | QQ920924960的博客</title>
+    <title>Swift学习笔记：构造函数 | QQ920924960的博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="QQ920924960">
     
 
     
-    <meta name="description" content="Linux下的文件权限与目录配置">
+    <meta name="description" content="Swift中的构造函数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux学习：文件权限与目录配置">
-<meta property="og:url" content="http://yoursite.com/2015/01/30/Linux学习：文件权限与目录配置/index.html">
+<meta property="og:title" content="Swift学习笔记：构造函数">
+<meta property="og:url" content="http://yoursite.com/2016/01/04/Swift学习笔记：构造函数/index.html">
 <meta property="og:site_name" content="QQ920924960的博客">
-<meta property="og:description" content="Linux下的文件权限与目录配置">
-<meta property="og:image" content="http://en.920924960.com/public/img/linuxDIRTREE.gif">
-<meta property="og:updated_time" content="2016-05-08T13:42:56.000Z">
+<meta property="og:description" content="Swift中的构造函数">
+<meta property="og:updated_time" content="2016-05-08T13:45:18.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux学习：文件权限与目录配置">
-<meta name="twitter:description" content="Linux下的文件权限与目录配置">
-<meta name="twitter:image" content="http://en.920924960.com/public/img/linuxDIRTREE.gif">
+<meta name="twitter:title" content="Swift学习笔记：构造函数">
+<meta name="twitter:description" content="Swift中的构造函数">
 
     
     <link rel="alternative" href="/atom.xml" title="QQ920924960的博客" type="application/atom+xml">
@@ -78,14 +76,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/01/30/Linux学习：文件权限与目录配置/" title="Linux学习：文件权限与目录配置" itemprop="url">Linux学习：文件权限与目录配置</a>
+      <a href="/2016/01/04/Swift学习笔记：构造函数/" title="Swift学习笔记：构造函数" itemprop="url">Swift学习笔记：构造函数</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="QQ920924960" target="_blank" itemprop="author">QQ920924960</a>
 		
   <p class="article-time">
-    <time datetime="2015-01-30T10:29:00.000Z" itemprop="datePublished"> 发表于 2015-01-30</time>
+    <time datetime="2016-01-04T10:29:00.000Z" itemprop="datePublished"> 发表于 2016-01-04</time>
     
   </p>
 </header>
@@ -94,48 +92,28 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#用户身份与用户组记录的文件"><span class="toc-number">1.</span> <span class="toc-text">用户身份与用户组记录的文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#文件权限概念"><span class="toc-number">2.</span> <span class="toc-text">文件权限概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#改变文件属性与权限"><span class="toc-number">3.</span> <span class="toc-text">改变文件属性与权限</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#文件种类与扩展名"><span class="toc-number">4.</span> <span class="toc-text">文件种类与扩展名</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux目录配置标准：FHS"><span class="toc-number">5.</span> <span class="toc-text">Linux目录配置标准：FHS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#绝对路径与相对路径"><span class="toc-number">6.</span> <span class="toc-text">绝对路径与相对路径</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#例子"><span class="toc-number">7.</span> <span class="toc-text">例子</span></a></li></ol>
+			
 		
 		</div>
 		
-		<p>Linux最优秀的地方之一，就在于它的多用户、多任务环境。Linux一般将文件可存取访问的身份分为3个类别，分别是owner（用户）、group（用户组）、others（其他人），且3种身份都各自有自己的read，write，execute等权限。</p>
-<h1 id="用户身份与用户组记录的文件"><a href="#用户身份与用户组记录的文件" class="headerlink" title="用户身份与用户组记录的文件"></a>用户身份与用户组记录的文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\etc\passwd     #所有系统账号的相关信息</span><br><span class="line">\etc\shadow     #个人的密码</span><br><span class="line">\etc\group      #Linux所有的组名</span><br></pre></td></tr></table></figure>
-<h1 id="文件权限概念"><a href="#文件权限概念" class="headerlink" title="文件权限概念"></a>文件权限概念</h1><p>当屏幕前面出现“Permission deny”的时候，肯定是权限设置错误。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ls -al          #ls:list，列出所有文件的详细信息</span><br><span class="line">ls -l           #显示文件，属性的第一个字段是文件的权限，共10位，比如-rwxr-xr--，表示owner具有rwx权限，group具有rx权限，others只具有r权限</span><br></pre></td></tr></table></figure></p>
-<h1 id="改变文件属性与权限"><a href="#改变文件属性与权限" class="headerlink" title="改变文件属性与权限"></a>改变文件属性与权限</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chgrp       #改变文件所属用户组，具体句法记得使用 man page 查询</span><br><span class="line">chown -R 用户账号:所在组群 文件名      #改变文件所有者</span><br><span class="line">chmod       #改变文件的权限</span><br></pre></td></tr></table></figure>
-<p>其中，chmod修改权限的方法有两种，分别是符号法与数字法，数字法中r，w，x的数值分别是4，2，1。</p>
-<p>要开放“目录”（注意不是“文件”）给任何人看，应该至少同时给予r和x权限，但w权限不可随便给予。</p>
-<h1 id="文件种类与扩展名"><a href="#文件种类与扩展名" class="headerlink" title="文件种类与扩展名"></a>文件种类与扩展名</h1><p>使用<code>ls -l</code>查看到的十个字符中，第一个字符为文件的类型：</p>
-<ul>
-<li>-: 普通文件（regular file）</li>
-<li>d: 目录文件（directory）</li>
-<li>l: 连接文件，类似于windows的快捷方式（link）</li>
-<li>b: 块设备文件（block）</li>
-<li>c: 字符设备文件（character）</li>
-<li>s: 套接字（sockets）</li>
-<li>p: 管道（FIFO, pipe）</li>
-</ul>
-<h1 id="Linux目录配置标准：FHS"><a href="#Linux目录配置标准：FHS" class="headerlink" title="Linux目录配置标准：FHS"></a>Linux目录配置标准：FHS</h1><p><img src="http://en.920924960.com/public/img/linuxDIRTREE.gif" alt=""><br>根据FHS的定义，最好将/var独立出来，这样至少/var死掉的时候，根目录还活着，还能够进入救援模式。</p>
-<h1 id="绝对路径与相对路径"><a href="#绝对路径与相对路径" class="headerlink" title="绝对路径与相对路径"></a>绝对路径与相对路径</h1><ul>
-<li>cd/var/log(absolute)</li>
-<li>cd../var/log(relative)</li>
-<li>.: 代表当前的目录，也可以用./来表示</li>
-<li>..: 代表上一层目录，也可以用../来表示</li>
-</ul>
-<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><p>将install.log文件复制成为LAYtest.log，并且要给linanya这个人读写权限，可以这样做：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cp install.log LAYtest.log     #若复制文件夹，用cp -r</span><br><span class="line">[root@localhost ~]# ls -al LAYtest.log </span><br><span class="line">-rw-r--r-- 1 root root 62826 9月  17 15:19 LAYtest.log     #虽然完成了复制，但仍然是root的文件</span><br><span class="line">[root@localhost ~]# chown linanya LAYtest.log </span><br><span class="line">[root@localhost ~]# ls -al LAYtest.log       </span><br><span class="line">-rw-r--r-- 1 linanya root 62826 9月  17 15:19 LAYtest.log  #文件变成linanya的</span><br><span class="line">[root@localhost ~]#</span><br></pre></td></tr></table></figure></p>
-  
+		<p>1、新建基于Swift语言的Single View Application工程</p>
+<p>2、新建Person.swift文件，键入如下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import Foundation</span><br><span class="line"></span><br><span class="line">class Person: NSObject &#123;</span><br><span class="line"></span><br><span class="line">    // 定义“对象“属性可以使用？</span><br><span class="line">    var name: String?</span><br><span class="line">    // 定义基本数据类型最好赋初始值</span><br><span class="line">    // Swift中基本数据类型设置为?, super.init()不会分配存储空间</span><br><span class="line">    // 所以利用KVC赋值会报属性找不到</span><br><span class="line">    var age: Int = 0</span><br><span class="line">    </span><br><span class="line">    // 如果要初始化必须重写init方法，只要重写了init方法就不用加?了</span><br><span class="line">    override init() &#123;</span><br><span class="line">        name = &quot;frank&quot;</span><br><span class="line">        age = 25</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // Swift中支持方法名重载，同样的名称只要参数不同就可以</span><br><span class="line">    // 一旦定义了init方法，但是没有重写init方法，默认的init方法就会失效</span><br><span class="line">    init(name:String, age:Int) &#123;</span><br><span class="line">        self.name = name</span><br><span class="line">        self.age = age</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    init(dict:[String: NSObject]) &#123;</span><br><span class="line">        super.init()</span><br><span class="line">        // 使用kvc给self赋值前，必须调用super.init()，目的是保证对象创建成功</span><br><span class="line">        self.setValuesForKeysWithDictionary(dict)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>3、在ViewController.swift文件中键入如下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import UIKit</span><br><span class="line"></span><br><span class="line">class ViewController: UIViewController &#123;</span><br><span class="line">    </span><br><span class="line">    override func viewDidLoad() &#123;</span><br><span class="line">        super.viewDidLoad()</span><br><span class="line">        </span><br><span class="line">        // 不需要import可以直接使用，因为Swift中有一个namespace的概念</span><br><span class="line">        // 默认情况下项目名称就是命名空间，同一个项目所有的资源共享</span><br><span class="line">        // 使用Swift最好使用cocoapods管理第三方框架，避免命名空间相同导致的冲突</span><br><span class="line">        </span><br><span class="line">        let person = Person()</span><br><span class="line">        print(&quot;\(person.name), \(person.age)&quot;)</span><br><span class="line">        </span><br><span class="line">        let person2 = Person(name: &quot;kaishushu&quot;, age: 25)</span><br><span class="line">        print(&quot;\(person2.name), \(person2.age)&quot;)</span><br><span class="line">        </span><br><span class="line">        let person3 = Person(dict: [&quot;name&quot;: &quot;frank&quot;, &quot;age&quot; : 25])</span><br><span class="line">        print(&quot;\(person3.name), \(person3.age)&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  <a class="article-category-link" href="/categories/Swift/">Swift</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Linux/">Linux</a><a href="/tags/文件管理/">文件管理</a><a href="/tags/目录管理/">目录管理</a>
+  <span></span> <a href="/tags/Swift/">Swift</a><a href="/tags/iOS/">iOS</a>
   </div>
 
 </div>
@@ -144,7 +122,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2015/01/30/Linux学习：文件权限与目录配置/" data-title="Linux学习：文件权限与目录配置 | QQ920924960的博客" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yoursite.com/2016/01/04/Swift学习笔记：构造函数/" data-title="Swift学习笔记：构造函数 | QQ920924960的博客" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -158,18 +136,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/01/30/Git常用命令速查表/" title="Git常用命令速查表">
+ <a href="/2016/01/06/Swift学习笔记：懒加载/" title="Swift学习笔记：懒加载">
   <strong>上一篇：</strong><br/>
   <span>
-  Git常用命令速查表</span>
+  Swift学习笔记：懒加载</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/01/30/Linux学习：文件与目录管理/"  title="Linux学习：文件与目录管理">
+<a href="/2016/01/02/Swift学习笔记：闭包/"  title="Swift学习笔记：闭包">
  <strong>下一篇：</strong><br/> 
- <span>Linux学习：文件与目录管理
+ <span>Swift学习笔记：闭包
 </span>
 </a>
 </div>
@@ -180,7 +158,7 @@
 <section id="comments" class="comment">
 	
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="2015/01/30/Linux学习：文件权限与目录配置/" data-title="Linux学习：文件权限与目录配置" data-url="http://yoursite.com/2015/01/30/Linux学习：文件权限与目录配置/"></div>
+	<div class="ds-thread" data-thread-key="2016/01/04/Swift学习笔记：构造函数/" data-title="Swift学习笔记：构造函数" data-url="http://yoursite.com/2016/01/04/Swift学习笔记：构造函数/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -204,7 +182,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#用户身份与用户组记录的文件"><span class="toc-number">1.</span> <span class="toc-text">用户身份与用户组记录的文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#文件权限概念"><span class="toc-number">2.</span> <span class="toc-text">文件权限概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#改变文件属性与权限"><span class="toc-number">3.</span> <span class="toc-text">改变文件属性与权限</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#文件种类与扩展名"><span class="toc-number">4.</span> <span class="toc-text">文件种类与扩展名</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux目录配置标准：FHS"><span class="toc-number">5.</span> <span class="toc-text">Linux目录配置标准：FHS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#绝对路径与相对路径"><span class="toc-number">6.</span> <span class="toc-text">绝对路径与相对路径</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#例子"><span class="toc-number">7.</span> <span class="toc-text">例子</span></a></li></ol>
+ 
  
   </div>
 
