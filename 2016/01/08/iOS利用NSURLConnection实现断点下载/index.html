@@ -4,23 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Swift学习笔记：UITableView | QQ920924960的博客</title>
+    <title>iOS利用NSURLConnection实现断点下载 | QQ920924960的博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="QQ920924960">
     
 
     
-    <meta name="description" content="Swift中UITableView的使用">
+    <meta name="description" content="NSURLConnection实现断点下载">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Swift学习笔记：UITableView">
-<meta property="og:url" content="http://yoursite.com/2016/01/08/Swift学习笔记：UITableView/index.html">
+<meta property="og:title" content="iOS利用NSURLConnection实现断点下载">
+<meta property="og:url" content="http://yoursite.com/2016/01/08/iOS利用NSURLConnection实现断点下载/index.html">
 <meta property="og:site_name" content="QQ920924960的博客">
-<meta property="og:description" content="Swift中UITableView的使用">
-<meta property="og:updated_time" content="2016-05-08T13:53:49.000Z">
+<meta property="og:description" content="NSURLConnection实现断点下载">
+<meta property="og:updated_time" content="2016-05-16T15:27:03.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Swift学习笔记：UITableView">
-<meta name="twitter:description" content="Swift中UITableView的使用">
+<meta name="twitter:title" content="iOS利用NSURLConnection实现断点下载">
+<meta name="twitter:description" content="NSURLConnection实现断点下载">
 
     
     <link rel="alternative" href="/atom.xml" title="QQ920924960的博客" type="application/atom+xml">
@@ -76,7 +76,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/01/08/Swift学习笔记：UITableView/" title="Swift学习笔记：UITableView" itemprop="url">Swift学习笔记：UITableView</a>
+      <a href="/2016/01/08/iOS利用NSURLConnection实现断点下载/" title="iOS利用NSURLConnection实现断点下载" itemprop="url">iOS利用NSURLConnection实现断点下载</a>
   </h1>
   <p class="article-author">By
        
@@ -92,13 +92,15 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#注意："><span class="toc-number">1.</span> <span class="toc-text">注意：</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#首先在viewDidLoad中创建一个NSURLConnection，请求视频链接"><span class="toc-number">1.</span> <span class="toc-text">首先在viewDidLoad中创建一个NSURLConnection，请求视频链接</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#然后遵守NSURLConnectionDataDelegate协议，并实现相应的代理方法"><span class="toc-number">2.</span> <span class="toc-text">然后遵守NSURLConnectionDataDelegate协议，并实现相应的代理方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#运行程序，查看控制台打印的结果，复制控制台的文件路径，去沙盒中查看文件"><span class="toc-number">3.</span> <span class="toc-text">运行程序，查看控制台打印的结果，复制控制台的文件路径，去沙盒中查看文件</span></a></li></ol>
 		
 		</div>
 		
-		<p>简单实现tableview的编写</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> UIKit</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">loadView</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">let</span> tableView = <span class="type">UITableView</span>()</span><br><span class="line">        tableView.frame = <span class="type">UIScreen</span>.mainScreen().bounds</span><br><span class="line">        tableView.dataSource = <span class="keyword">self</span></span><br><span class="line">        tableView.delegate = <span class="keyword">self</span></span><br><span class="line">        view = tableView</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 懒加载数据</span></span><br><span class="line">    <span class="built_in">lazy</span> <span class="keyword">var</span> dataList:[<span class="type">String</span>] = &#123;</span><br><span class="line">        <span class="keyword">return</span> [<span class="string">"frank"</span>, <span class="string">"tom"</span>, <span class="string">"kevin"</span>, <span class="string">"hello"</span>]</span><br><span class="line">    &#125;()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// MARK: - 苹果官方建议，可以将数据源和代理方法单独写到一个扩展中，以便于提高代码的可读性</span></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">ViewController</span>: <span class="title">UITableViewDataSource</span>, <span class="title">UITableViewDelegate</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">numberOfSectionsInTableView</span><span class="params">(tableView: UITableView)</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">tableView</span><span class="params">(tableView: UITableView, numberOfRowsInSection section: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> dataList.<span class="built_in">count</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">tableView</span><span class="params">(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath)</span></span> -&gt; <span class="type">UITableViewCell</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> cell = tableView.dequeueReusableCellWithIdentifier(<span class="string">"customCell"</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="literal">nil</span> == cell &#123;</span><br><span class="line">            cell = <span class="type">UITableViewCell</span>(style: <span class="type">UITableViewCellStyle</span>.<span class="type">Default</span>, reuseIdentifier: <span class="string">"customCell"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        cell?.textLabel?.text = dataList[indexPath.row]</span><br><span class="line">        <span class="keyword">return</span> cell!</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h1><p>苹果官方建议，可以将数据源和代理方法单独写到一个扩展中，以便于提高代码的可读性</p>
+		<h1 id="首先在viewDidLoad中创建一个NSURLConnection，请求视频链接"><a href="#首先在viewDidLoad中创建一个NSURLConnection，请求视频链接" class="headerlink" title="首先在viewDidLoad中创建一个NSURLConnection，请求视频链接"></a>首先在viewDidLoad中创建一个NSURLConnection，请求视频链接</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line">    </span><br><span class="line">    [NSURLConnection connectionWithRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@&quot;http://112.90.11.162/vhot2.qqvideo.tc.qq.com/s0197ukk2uf.p703.1.mp4?sha=&amp;sdtfrom=v1010&amp;vkey=B81E0AFA2F11BC831D38186EB5E20AD98569794CC688C8F8F61DF359BBE8F61525C832D411B020700F87D4C3D41B701C695E0209B98D65783D63BE29933DCE2FD7E76EB7A294702FA8EDD86A26F7585F9300C1ECBFCF2184&amp;ocid=222827948&amp;ocid=344465324&amp;ocid=756653322&quot;]] delegate:self];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="然后遵守NSURLConnectionDataDelegate协议，并实现相应的代理方法"><a href="#然后遵守NSURLConnectionDataDelegate协议，并实现相应的代理方法" class="headerlink" title="然后遵守NSURLConnectionDataDelegate协议，并实现相应的代理方法"></a>然后遵守NSURLConnectionDataDelegate协议，并实现相应的代理方法</h1><p>遵守协议<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@interface ViewController () &lt;NSURLConnectionDataDelegate&gt;</span><br></pre></td></tr></table></figure></p>
+<p>实现代理方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#pragma mark - NSURLConnectionDataDelegate</span><br><span class="line">- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response</span><br><span class="line">&#123;</span><br><span class="line">    NSLog(@&quot;%@&quot;, response.suggestedFilename);</span><br><span class="line">    // 文件路径</span><br><span class="line">    NSString *cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject];</span><br><span class="line">    NSString *filePath = [cachesPath stringByAppendingPathComponent:response.suggestedFilename];</span><br><span class="line">    NSLog(@&quot;%@&quot;, filePath);</span><br><span class="line">    // 创建输出流(append为YES的话，每次写入都是追加到文件尾部)</span><br><span class="line">    self.outputStream = [[NSOutputStream alloc] initToFileAtPath:filePath append:YES];</span><br><span class="line">    // 打开流，如果文件不存在就会自动创建</span><br><span class="line">    [self.outputStream open];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data</span><br><span class="line">&#123;</span><br><span class="line">    // 写入数据</span><br><span class="line">    [self.outputStream write:[data bytes] maxLength:data.length];</span><br><span class="line">    NSLog(@&quot;%s&quot;, __func__);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (void)connectionDidFinishLoading:(NSURLConnection *)connection</span><br><span class="line">&#123;</span><br><span class="line">    [self.outputStream close];</span><br><span class="line">    NSLog(@&quot;%s&quot;, __func__);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="运行程序，查看控制台打印的结果，复制控制台的文件路径，去沙盒中查看文件"><a href="#运行程序，查看控制台打印的结果，复制控制台的文件路径，去沙盒中查看文件" class="headerlink" title="运行程序，查看控制台打印的结果，复制控制台的文件路径，去沙盒中查看文件"></a>运行程序，查看控制台打印的结果，复制控制台的文件路径，去沙盒中查看文件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">2016-05-16 23:14:48.635 Demo1[973:21588] s0197ukk2uf.p703.1.mp4</span><br><span class="line">2016-05-16 23:14:48.636 Demo1[973:21588] /Users/QQ920924960/Library/Developer/CoreSimulator/Devices/6469D6AF-9525-437F-95CF-077C564DDBEF/data/Containers/Data/Application/F2C90F40-EF6B-46C4-8034-3B6B2943399A/Library/Caches/s0197ukk2uf.p703.1.mp4</span><br><span class="line">2016-05-16 23:14:48.636 Demo1[973:21588] -[ViewController connection:didReceiveData:]</span><br><span class="line">2016-05-16 23:14:48.649 Demo1[973:21588] -[ViewController connection:didReceiveData:]</span><br><span class="line">2016-05-16 23:14:48.651 Demo1[973:21588] -[ViewController connection:didReceiveData:]</span><br><span class="line">2016-05-16 23:15:47.947 Demo1[973:21588] -[ViewController connection:didReceiveData:]</span><br><span class="line">2016-05-16 23:15:47.948 Demo1[973:21588] -[ViewController connection:didReceiveData:]</span><br><span class="line">2016-05-16 23:15:47.976 Demo1[973:21588] -[ViewController connection:didReceiveData:]</span><br><span class="line">2016-05-16 23:15:47.977 Demo1[973:21588] -[ViewController connectionDidFinishLoading:]</span><br></pre></td></tr></table></figure>
+<p>文件路径：<code>/Users/QQ920924960/Library/Developer/CoreSimulator/Devices/6469D6AF-9525-437F-95CF-077C564DDBEF/data/Containers/Data/Application/F2C90F40-EF6B-46C4-8034-3B6B2943399A/Library/Caches/</code></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -106,13 +108,13 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/Swift/">Swift</a>
+  <a class="article-category-link" href="/categories/Objective-C/">Objective-C</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/Swift/">Swift</a><a href="/tags/iOS/">iOS</a>
+  <span></span> <a href="/tags/iOS/">iOS</a><a href="/tags/Objective-C/">Objective-C</a>
   </div>
 
 </div>
@@ -121,7 +123,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2016/01/08/Swift学习笔记：UITableView/" data-title="Swift学习笔记：UITableView | QQ920924960的博客" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yoursite.com/2016/01/08/iOS利用NSURLConnection实现断点下载/" data-title="iOS利用NSURLConnection实现断点下载 | QQ920924960的博客" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -134,19 +136,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/01/08/iOS利用NSURLConnection实现断点下载/" title="iOS利用NSURLConnection实现断点下载">
-  <strong>上一篇：</strong><br/>
-  <span>
-  iOS利用NSURLConnection实现断点下载</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/01/06/Swift学习笔记：懒加载/"  title="Swift学习笔记：懒加载">
+<a href="/2016/01/08/Swift学习笔记：UITableView/"  title="Swift学习笔记：UITableView">
  <strong>下一篇：</strong><br/> 
- <span>Swift学习笔记：懒加载
+ <span>Swift学习笔记：UITableView
 </span>
 </a>
 </div>
@@ -157,7 +151,7 @@
 <section id="comments" class="comment">
 	
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="2016/01/08/Swift学习笔记：UITableView/" data-title="Swift学习笔记：UITableView" data-url="http://yoursite.com/2016/01/08/Swift学习笔记：UITableView/"></div>
+	<div class="ds-thread" data-thread-key="2016/01/08/iOS利用NSURLConnection实现断点下载/" data-title="iOS利用NSURLConnection实现断点下载" data-url="http://yoursite.com/2016/01/08/iOS利用NSURLConnection实现断点下载/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -181,7 +175,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#注意："><span class="toc-number">1.</span> <span class="toc-text">注意：</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#首先在viewDidLoad中创建一个NSURLConnection，请求视频链接"><span class="toc-number">1.</span> <span class="toc-text">首先在viewDidLoad中创建一个NSURLConnection，请求视频链接</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#然后遵守NSURLConnectionDataDelegate协议，并实现相应的代理方法"><span class="toc-number">2.</span> <span class="toc-text">然后遵守NSURLConnectionDataDelegate协议，并实现相应的代理方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#运行程序，查看控制台打印的结果，复制控制台的文件路径，去沙盒中查看文件"><span class="toc-number">3.</span> <span class="toc-text">运行程序，查看控制台打印的结果，复制控制台的文件路径，去沙盒中查看文件</span></a></li></ol>
  
   </div>
 
