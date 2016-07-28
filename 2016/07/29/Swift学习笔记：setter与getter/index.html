@@ -4,23 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Swift学习笔记：懒加载 | QQ920924960的博客</title>
+    <title>Swift学习笔记：setter与getter | QQ920924960的博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="QQ920924960">
     
 
     
-    <meta name="description" content="Swift中的懒加载">
+    <meta name="description" content="Swift学习笔记：setter与getter">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Swift学习笔记：懒加载">
-<meta property="og:url" content="http://yoursite.com/2016/01/06/Swift学习笔记：懒加载/index.html">
+<meta property="og:title" content="Swift学习笔记：setter与getter">
+<meta property="og:url" content="http://yoursite.com/2016/07/29/Swift学习笔记：setter与getter/index.html">
 <meta property="og:site_name" content="QQ920924960的博客">
-<meta property="og:description" content="Swift中的懒加载">
-<meta property="og:updated_time" content="2016-05-08T13:55:38.000Z">
+<meta property="og:description" content="Swift学习笔记：setter与getter">
+<meta property="og:updated_time" content="2016-07-28T16:30:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Swift学习笔记：懒加载">
-<meta name="twitter:description" content="Swift中的懒加载">
+<meta name="twitter:title" content="Swift学习笔记：setter与getter">
+<meta name="twitter:description" content="Swift学习笔记：setter与getter">
 
     
     <link rel="alternative" href="/atom.xml" title="QQ920924960的博客" type="application/atom+xml">
@@ -76,14 +76,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/01/06/Swift学习笔记：懒加载/" title="Swift学习笔记：懒加载" itemprop="url">Swift学习笔记：懒加载</a>
+      <a href="/2016/07/29/Swift学习笔记：setter与getter/" title="Swift学习笔记：setter与getter" itemprop="url">Swift学习笔记：setter与getter</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="QQ920924960" target="_blank" itemprop="author">QQ920924960</a>
 		
   <p class="article-time">
-    <time datetime="2016-01-06T10:29:00.000Z" itemprop="datePublished"> 发表于 2016-01-06</time>
+    <time datetime="2016-07-28T16:25:00.000Z" itemprop="datePublished"> 发表于 2016-07-29</time>
     
   </p>
 </header>
@@ -92,13 +92,14 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#使用方式"><span class="toc-number">1.</span> <span class="toc-text">使用方式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#另一种写法【不用多声明一个变量了】"><span class="toc-number">2.</span> <span class="toc-text">另一种写法【不用多声明一个变量了】</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注意：当给cell的模型赋值的时候，cell一定要指定类型，不然它就不知道cell是属于哪个类下的"><span class="toc-number">3.</span> <span class="toc-text">注意：当给cell的模型赋值的时候，cell一定要指定类型，不然它就不知道cell是属于哪个类下的</span></a></li></ol>
 		
 		</div>
 		
-		<p>新建基于Swift语言的Single View Application工程</p>
-<p>在ViewController.swift文件中键入如下代码</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> UIKit</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span><br><span class="line">     Swift中的懒加载会在第一次访问的时候执行</span><br><span class="line">     懒加载其实就是一个提前准备好的闭包</span><br><span class="line">     */</span></span><br><span class="line">    <span class="built_in">lazy</span> <span class="keyword">var</span> dataList:[<span class="type">String</span>] = &#123;</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"懒加载"</span>)</span><br><span class="line">        <span class="keyword">return</span> [<span class="string">"zhangsan"</span>, <span class="string">"lisi"</span>, <span class="string">"wanger"</span>];</span><br><span class="line">    &#125;()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> testFunc = &#123;</span><br><span class="line">        ()-&gt;[<span class="type">String</span>] <span class="keyword">in</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">"进行了懒加载"</span>)</span><br><span class="line">        <span class="keyword">return</span> [<span class="string">"zhangsan"</span>, <span class="string">"lisi"</span>, <span class="string">"wanger"</span>]</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 注意懒加载一定要用var</span></span><br><span class="line">    <span class="built_in">lazy</span> <span class="keyword">var</span> dataList2:[<span class="type">String</span>] = <span class="keyword">self</span>.testFunc()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">touchesBegan</span><span class="params">(touches: Set&lt;UITouch&gt;, withEvent event: UIEvent?)</span></span> &#123;</span><br><span class="line">        <span class="built_in">print</span>(dataList)</span><br><span class="line">        <span class="built_in">print</span>(dataList)</span><br><span class="line">        <span class="built_in">print</span>(testFunc)</span><br><span class="line">        <span class="built_in">print</span>(dataList2)</span><br><span class="line">        <span class="built_in">print</span>(dataList2)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>  
+		<h1 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h1><p>闭包的基本格式</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">people</span>: <span class="title">NSObject</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 这个是计算属性，并不存放具体的值</span></span><br><span class="line">    <span class="keyword">var</span> name:<span class="type">String</span> &#123;</span><br><span class="line">        <span class="keyword">set</span> &#123;</span><br><span class="line">            <span class="keyword">self</span>.storeName = newValue</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">get</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">self</span>.storeName!</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 这是变量才是存储属性。在计算属性中的setter里给存储属性赋值，getter里返回存储属性的值</span></span><br><span class="line">    <span class="keyword">var</span> storeName:<span class="type">String</span>?</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="另一种写法【不用多声明一个变量了】"><a href="#另一种写法【不用多声明一个变量了】" class="headerlink" title="另一种写法【不用多声明一个变量了】"></a>另一种写法【不用多声明一个变量了】</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name  = <span class="string">"myd"</span> &#123;</span><br><span class="line">    <span class="comment">/*</span><br><span class="line">     这里是在赋值之前会调用,在这里面会有一个新属性newValue，</span><br><span class="line">     这个newValue就等价与之前oc里面的-(void)setX:(CGFloat)x;</span><br><span class="line">     里面最后面的那个小x这样你就可以处理新值了，</span><br><span class="line">     并把他直接赋值给当前属性</span><br><span class="line">     */</span></span><br><span class="line">    <span class="keyword">willSet</span>&#123;</span><br><span class="line">        name = newValue</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">/*</span><br><span class="line">     这里就是在赋完值以后，马上就回进入，并不是当你需要取值的时候才会进到这里，</span><br><span class="line">     但是这里面的name已经是改变以后的值了,</span><br><span class="line">     所以当你对这里面的name进行一系列的操作时其实就和oc里面的重写get方法是一样的，</span><br><span class="line">     只不过是直接改变属性本身的值，但效果都是一样的</span><br><span class="line">     */</span></span><br><span class="line">    <span class="keyword">didSet</span>&#123;</span><br><span class="line">        name = name + <span class="string">"hhhh"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//这样如果我们在给它赋值的时候就可以在willSet里面做很多操作，并且可以在didSet里面修改里面的值，来起到当我们再次调用这个属性的时候拿到的是修改后的值"mydhhhh"</span></span><br></pre></td></tr></table></figure>
+<h1 id="注意：当给cell的模型赋值的时候，cell一定要指定类型，不然它就不知道cell是属于哪个类下的"><a href="#注意：当给cell的模型赋值的时候，cell一定要指定类型，不然它就不知道cell是属于哪个类下的" class="headerlink" title="注意：当给cell的模型赋值的时候，cell一定要指定类型，不然它就不知道cell是属于哪个类下的"></a>注意：当给cell的模型赋值的时候，cell一定要指定类型，不然它就不知道cell是属于哪个类下的</h1><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">tableView</span><span class="params">(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath)</span></span> -&gt; <span class="type">UITableViewCell</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> cell:<span class="type">TTSignRecordCell</span> = <span class="type">TTSignRecordCell</span>.signRecordCellWithTableView(tableView) <span class="keyword">as</span>! <span class="type">TTSignRecordCell</span></span><br><span class="line">    <span class="comment">// 设置数据</span></span><br><span class="line">    cell.keyLocationRecord = data[indexPath.row]</span><br><span class="line">    <span class="keyword">return</span> cell <span class="keyword">as</span> <span class="type">UITableViewCell</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -120,7 +121,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2016/01/06/Swift学习笔记：懒加载/" data-title="Swift学习笔记：懒加载 | QQ920924960的博客" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yoursite.com/2016/07/29/Swift学习笔记：setter与getter/" data-title="Swift学习笔记：setter与getter | QQ920924960的博客" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -133,19 +134,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2016/01/08/Swift学习笔记：UITableView/" title="Swift学习笔记：UITableView">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Swift学习笔记：UITableView</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/01/04/Swift学习笔记：构造函数/"  title="Swift学习笔记：构造函数">
+<a href="/2016/07/26/Swift学习笔记：循环创建控件/"  title="Swift学习笔记：循环创建控件">
  <strong>下一篇：</strong><br/> 
- <span>Swift学习笔记：构造函数
+ <span>Swift学习笔记：循环创建控件
 </span>
 </a>
 </div>
@@ -156,7 +149,7 @@
 <section id="comments" class="comment">
 	
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="2016/01/06/Swift学习笔记：懒加载/" data-title="Swift学习笔记：懒加载" data-url="http://yoursite.com/2016/01/06/Swift学习笔记：懒加载/"></div>
+	<div class="ds-thread" data-thread-key="2016/07/29/Swift学习笔记：setter与getter/" data-title="Swift学习笔记：setter与getter" data-url="http://yoursite.com/2016/07/29/Swift学习笔记：setter与getter/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -180,7 +173,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#使用方式"><span class="toc-number">1.</span> <span class="toc-text">使用方式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#另一种写法【不用多声明一个变量了】"><span class="toc-number">2.</span> <span class="toc-text">另一种写法【不用多声明一个变量了】</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#注意：当给cell的模型赋值的时候，cell一定要指定类型，不然它就不知道cell是属于哪个类下的"><span class="toc-number">3.</span> <span class="toc-text">注意：当给cell的模型赋值的时候，cell一定要指定类型，不然它就不知道cell是属于哪个类下的</span></a></li></ol>
  
   </div>
 
